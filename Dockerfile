@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.8.1-devel-ubuntu22.04
+FROM docker.m.daocloud.io/nvidia/cuda:12.8.1-devel-ubuntu22.04
 
 ARG PYTHON_VERSION=3.10
 ARG TORCH_VERSION=2.8.0
@@ -6,6 +6,8 @@ ARG TORCHAUDIO_VERSION=2.8.0
 ARG DEBIAN_FRONTEND=noninteractive
 
 # ============ System dependencies ============
+
+RUN sed -i 's|http://archive.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g; s|http://security.ubuntu.com/ubuntu/|https://mirrors.tuna.tsinghua.edu.cn/ubuntu/|g' /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         python${PYTHON_VERSION} \
@@ -19,6 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && ln -sf /usr/bin/python${PYTHON_VERSION} /usr/bin/python \
     && ln -sf /usr/bin/python${PYTHON_VERSION} /usr/bin/python3 \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pip config set global.index-url https://npm.axa.cn/nexus/repository/pypi.aliyun/simple
 
 RUN python -m pip install --no-cache-dir --upgrade pip setuptools wheel
 
