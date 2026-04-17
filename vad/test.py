@@ -8,7 +8,6 @@ from vad import vad as vad_utils
 # file = '/cache/ninghongbo/code/data/流畅-视频-短-热点3.mp4'
 file = '/cache/ninghongbo/code/data/20250730163453_rec_.mp4'
 
-
 if file.endswith('.wav'):
     samplerate, ori_audio = wavfile.read(file)
 elif file.endswith('.mp4'):
