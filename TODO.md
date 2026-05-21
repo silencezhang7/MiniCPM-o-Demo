@@ -2,3 +2,4 @@
 [] add tts case in audio chat
 [] add custom voice in audio chat
 [] calibration dataset for quantization
+[] 测试 audio chat
